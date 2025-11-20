@@ -141,6 +141,8 @@ namespace GXDLMSDirector
             this.NetProtocolCB = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.UseRemoteSerialCB = new System.Windows.Forms.CheckBox();
+            this.LocalPortTB = new System.Windows.Forms.TextBox();
+            this.LocalPortLbl = new System.Windows.Forms.Label();
             this.PortTB = new System.Windows.Forms.TextBox();
             this.PortLbl = new System.Windows.Forms.Label();
             this.HostNameTB = new System.Windows.Forms.TextBox();
@@ -1228,13 +1230,15 @@ namespace GXDLMSDirector
             this.NetworkSettingsGB.Controls.Add(this.NetProtocolCB);
             this.NetworkSettingsGB.Controls.Add(this.label2);
             this.NetworkSettingsGB.Controls.Add(this.UseRemoteSerialCB);
+            this.NetworkSettingsGB.Controls.Add(this.LocalPortTB);
+            this.NetworkSettingsGB.Controls.Add(this.LocalPortLbl);
             this.NetworkSettingsGB.Controls.Add(this.PortTB);
             this.NetworkSettingsGB.Controls.Add(this.PortLbl);
             this.NetworkSettingsGB.Controls.Add(this.HostNameTB);
             this.NetworkSettingsGB.Controls.Add(this.HostLbl);
             this.NetworkSettingsGB.Location = new System.Drawing.Point(6, 243);
             this.NetworkSettingsGB.Name = "NetworkSettingsGB";
-            this.NetworkSettingsGB.Size = new System.Drawing.Size(457, 99);
+            this.NetworkSettingsGB.Size = new System.Drawing.Size(457, 125);
             this.NetworkSettingsGB.TabIndex = 34;
             this.NetworkSettingsGB.TabStop = false;
             this.NetworkSettingsGB.Text = "Settings";
@@ -1243,7 +1247,7 @@ namespace GXDLMSDirector
             // 
             this.NetProtocolCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.NetProtocolCB.FormattingEnabled = true;
-            this.NetProtocolCB.Location = new System.Drawing.Point(101, 70);
+            this.NetProtocolCB.Location = new System.Drawing.Point(101, 97);
             this.NetProtocolCB.Name = "NetProtocolCB";
             this.NetProtocolCB.Size = new System.Drawing.Size(85, 21);
             this.NetProtocolCB.TabIndex = 13;
@@ -1251,7 +1255,7 @@ namespace GXDLMSDirector
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Location = new System.Drawing.Point(12, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 12;
@@ -1260,12 +1264,28 @@ namespace GXDLMSDirector
             // UseRemoteSerialCB
             // 
             this.UseRemoteSerialCB.AutoSize = true;
-            this.UseRemoteSerialCB.Location = new System.Drawing.Point(204, 71);
+            this.UseRemoteSerialCB.Location = new System.Drawing.Point(204, 99);
             this.UseRemoteSerialCB.Name = "UseRemoteSerialCB";
             this.UseRemoteSerialCB.Size = new System.Drawing.Size(179, 17);
             this.UseRemoteSerialCB.TabIndex = 14;
             this.UseRemoteSerialCB.Text = "Use Serial port through ethernet.";
             this.UseRemoteSerialCB.UseVisualStyleBackColor = true;
+            // 
+            // LocalPortTB
+            // 
+            this.LocalPortTB.Location = new System.Drawing.Point(101, 71);
+            this.LocalPortTB.Name = "LocalPortTB";
+            this.LocalPortTB.Size = new System.Drawing.Size(274, 20);
+            this.LocalPortTB.TabIndex = 16;
+            // 
+            // LocalPortLbl
+            // 
+            this.LocalPortLbl.AutoSize = true;
+            this.LocalPortLbl.Location = new System.Drawing.Point(12, 74);
+            this.LocalPortLbl.Name = "LocalPortLbl";
+            this.LocalPortLbl.Size = new System.Drawing.Size(57, 13);
+            this.LocalPortLbl.TabIndex = 15;
+            this.LocalPortLbl.Text = "Local port:";
             // 
             // PortTB
             // 
@@ -1279,9 +1299,9 @@ namespace GXDLMSDirector
             this.PortLbl.AutoSize = true;
             this.PortLbl.Location = new System.Drawing.Point(12, 48);
             this.PortLbl.Name = "PortLbl";
-            this.PortLbl.Size = new System.Drawing.Size(29, 13);
+            this.PortLbl.Size = new System.Drawing.Size(68, 13);
             this.PortLbl.TabIndex = 11;
-            this.PortLbl.Text = "Port:";
+            this.PortLbl.Text = "Remote port:";
             // 
             // HostNameTB
             // 
@@ -2374,6 +2394,8 @@ namespace GXDLMSDirector
         private System.Windows.Forms.ComboBox NetProtocolCB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox UseRemoteSerialCB;
+        private System.Windows.Forms.TextBox LocalPortTB;
+        private System.Windows.Forms.Label LocalPortLbl;
         private System.Windows.Forms.TextBox PortTB;
         private System.Windows.Forms.Label PortLbl;
         private System.Windows.Forms.TextBox HostNameTB;

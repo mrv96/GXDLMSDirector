@@ -183,6 +183,7 @@ namespace GXDLMSDirector
                 net.Protocol = NetworkType.Tcp;
                 this.HostNameTB.Text = ((GXNet)SelectedMedia).HostName;
                 this.PortTB.Text = ((GXNet)SelectedMedia).Port.ToString();
+                this.LocalPortTB.Text = ((GXNet)SelectedMedia).LocalPort.ToString();
                 NetProtocolCB.SelectedItem = ((GXNet)SelectedMedia).Protocol;
             }
             else
@@ -315,7 +316,7 @@ namespace GXDLMSDirector
             bool bConnected = (Device is GXDLMSDevice) && (Device as GXDLMSDevice).Media != null && (Device as GXDLMSDevice).Media.IsOpen;
             WaitTimeTB.Enabled = SerialPortCB.Enabled = AdvancedBtn.Enabled = ManufacturerCB.Enabled = MediasCB.Enabled =
                                        AuthenticationCB.Enabled = UseRemoteSerialCB.Enabled = OKBtn.Enabled = !bConnected;
-            HostNameTB.ReadOnly = PortTB.ReadOnly = PasswordTB.ReadOnly = ResendTb.ReadOnly = PhysicalServerAddressTB.ReadOnly = NameTB.ReadOnly = bConnected;
+            HostNameTB.ReadOnly = PortTB.ReadOnly = LocalPortTB.ReadOnly = PasswordTB.ReadOnly = ResendTb.ReadOnly = PhysicalServerAddressTB.ReadOnly = NameTB.ReadOnly = bConnected;
 
         }
         private void UpdateDeviceSettings(GXDLMSMeter device)
@@ -709,9 +710,16 @@ namespace GXDLMSDirector
                     SerialSettingsGB.Visible = SelectedMedia is GXSerial;
                     NetworkSettingsGB.Visible = SelectedMedia is GXNet;
                     TerminalSettingsGB.Visible = SelectedMedia is GXTerminal;
-                    if (SelectedMedia is GXNet && this.PortTB.Text == "")
+                    if (SelectedMedia is GXNet)
                     {
-                        this.PortTB.Text = "4059";
+                        if (this.PortTB.Text == "")
+                        {
+                            this.PortTB.Text = "4059";
+                        }
+                        if (this.LocalPortTB.Text == "")
+                        {
+                            this.LocalPortTB.Text = "0";
+                        }
                     }
                 }
                 else
@@ -970,10 +978,22 @@ namespace GXDLMSDirector
                     }
                     else
                     {
-                        throw new Exception("Invalid port number.");
+                        throw new Exception("Invalid host port number.");
                     }
                 }
                 ((GXNet)SelectedMedia).Port = port;
+                if (!Int32.TryParse(this.LocalPortTB.Text, out port))
+                {
+                    if (validate)
+                    {
+                        port = 0;
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid local port number.");
+                    }
+                }
+                ((GXNet)SelectedMedia).LocalPort = port;
                 device.UseRemoteSerial = UseRemoteSerialCB.Checked;
                 ((GXNet)SelectedMedia).Protocol = (NetworkType)NetProtocolCB.SelectedItem;
             }
