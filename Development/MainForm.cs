@@ -1784,6 +1784,7 @@ namespace GXDLMSDirector
                                 netMedia.HostName = serverClient.Ip;
                                 netMedia.Port = serverClient.Port;
                                 netMedia.LocalPort = events.Port;
+                                netMedia.Protocol = events.Protocol;
                                 it.MediaSettings = netMedia.Settings;
                             }
                             it.InitializeConnection();
@@ -1808,6 +1809,7 @@ namespace GXDLMSDirector
                             netMedia.HostName = serverClient.Ip;
                             netMedia.Port = serverClient.Port;
                             netMedia.LocalPort = events.Port;
+                            netMedia.Protocol = events.Protocol;
                             dev.MediaSettings = netMedia.Settings;
                         }
                         dev.InitializeConnection();
@@ -1865,6 +1867,7 @@ namespace GXDLMSDirector
                         netMedia.HostName = serverClient.Ip;
                         netMedia.Port = serverClient.Port;
                         netMedia.LocalPort = events.Port;
+                        netMedia.Protocol = events.Protocol;
                         dev.MediaSettings = netMedia.Settings;
                     }
                     dev.InitializeConnection();
