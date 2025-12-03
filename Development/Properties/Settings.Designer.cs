@@ -634,7 +634,22 @@ namespace GXDLMSDirector.Properties {
                 this["NotifyAuthenticationKey"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoConnectClient
+        {
+            get
+            {
+                return ((bool)(this["AutoConnectClient"]));
+            }
+            set
+            {
+                this["AutoConnectClient"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]

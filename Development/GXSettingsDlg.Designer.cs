@@ -60,6 +60,7 @@
             this.AddBtn = new System.Windows.Forms.Button();
             this.CertificationServerTb = new System.Windows.Forms.TextBox();
             this.CertificationServerLbl = new System.Windows.Forms.Label();
+            this.AutoConnectClientCb = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.NotificationsTab.SuspendLayout();
@@ -74,7 +75,7 @@
             this.panel1.Controls.Add(this.OKBtn);
             this.panel1.Controls.Add(this.CancelBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 280);
+            this.panel1.Location = new System.Drawing.Point(0, 303);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(423, 39);
             this.panel1.TabIndex = 1;
@@ -111,24 +112,25 @@
             this.Tabs.Location = new System.Drawing.Point(0, 0);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(423, 280);
+            this.Tabs.Size = new System.Drawing.Size(423, 303);
             this.Tabs.TabIndex = 2;
             // 
             // NotificationsTab
             // 
+            this.NotificationsTab.Controls.Add(this.AutoConnectClientCb);
             this.NotificationsTab.Controls.Add(this.NotificationsView);
             this.NotificationsTab.Controls.Add(this.panel3);
             this.NotificationsTab.Location = new System.Drawing.Point(4, 22);
             this.NotificationsTab.Name = "NotificationsTab";
             this.NotificationsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.NotificationsTab.Size = new System.Drawing.Size(415, 254);
+            this.NotificationsTab.Size = new System.Drawing.Size(415, 277);
             this.NotificationsTab.TabIndex = 1;
             this.NotificationsTab.Text = "Notifications";
             this.NotificationsTab.UseVisualStyleBackColor = true;
             // 
             // NotificationsView
             // 
-            this.NotificationsView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NotificationsView.Dock = System.Windows.Forms.DockStyle.Top;
             this.NotificationsView.Location = new System.Drawing.Point(3, 122);
             this.NotificationsView.Name = "NotificationsView";
             this.NotificationsView.Size = new System.Drawing.Size(409, 129);
@@ -365,7 +367,18 @@
             this.CertificationServerLbl.Name = "CertificationServerLbl";
             this.CertificationServerLbl.Size = new System.Drawing.Size(97, 13);
             this.CertificationServerLbl.TabIndex = 50;
-            this.CertificationServerLbl.Text = "Certification server:";
+            this.CertificationServerLbl.Text = "Certification server:";            
+            // 
+            // AutoConnectClientCb
+            // 
+            this.AutoConnectClientCb.AutoSize = true;
+            this.AutoConnectClientCb.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.AutoConnectClientCb.Location = new System.Drawing.Point(3, 257);
+            this.AutoConnectClientCb.Name = "AutoConnectClientCb";
+            this.AutoConnectClientCb.Size = new System.Drawing.Size(409, 17);
+            this.AutoConnectClientCb.TabIndex = 10;
+            this.AutoConnectClientCb.Text = "Auto connect client (disconnect server)";
+            this.AutoConnectClientCb.UseVisualStyleBackColor = true;
             // 
             // GXSettingsDlg
             // 
@@ -373,7 +386,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(423, 319);
+            this.ClientSize = new System.Drawing.Size(423, 342);
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -386,6 +399,7 @@
             this.panel1.ResumeLayout(false);
             this.Tabs.ResumeLayout(false);
             this.NotificationsTab.ResumeLayout(false);
+            this.NotificationsTab.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ExternalMediasTab.ResumeLayout(false);
@@ -427,5 +441,6 @@
         private System.Windows.Forms.Label AuthenticationKeyLbl;
         private System.Windows.Forms.TextBox CertificationServerTb;
         private System.Windows.Forms.Label CertificationServerLbl;
+        private System.Windows.Forms.CheckBox AutoConnectClientCb;
     }
 }

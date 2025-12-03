@@ -65,6 +65,7 @@ namespace GXDLMSDirector
     public partial class MainForm : Form
     {
         GXNet events;
+        (string Ip, UInt16 Port) serverClient = ("", 0);
 
         /// <summary>
         /// Active DC.
@@ -1776,6 +1777,15 @@ namespace GXDLMSDirector
                         if (!it.Media.IsOpen)
                         {
                             this.OnProgress(null, "Connecting", ++pos, cnt);
+                            if (serverClient.Ip != "" && it.Media is GXNet)
+                            {
+                                GXNet netMedia = it.Media as GXNet;
+                                netMedia.HostName = serverClient.Ip;
+                                netMedia.Port = serverClient.Port;
+                                netMedia.LocalPort = events.Port;
+                                it.MediaSettings = netMedia.Settings;
+                                serverClient = ("", 0);
+                            }
                             it.InitializeConnection();
                         }
                     }
@@ -1786,6 +1796,15 @@ namespace GXDLMSDirector
                     {
                         GXDLMSDevice dev = (GXDLMSDevice)obj;
                         this.OnProgress(null, "Connecting", 0, 1);
+                        if (serverClient.Ip != "" && dev.Media is GXNet)
+                        {
+                            GXNet netMedia = dev.Media as GXNet;
+                            netMedia.HostName = serverClient.Ip;
+                            netMedia.Port = serverClient.Port;
+                            netMedia.LocalPort = events.Port;
+                            dev.MediaSettings = netMedia.Settings;
+                            serverClient = ("", 0);
+                        }
                         dev.InitializeConnection();
                         if (InvokeRequired)
                         {
@@ -1829,6 +1848,15 @@ namespace GXDLMSDirector
                     this.OnProgress(null, "Connecting", 0, 1);
                     GXDLMSObject tmp = obj as GXDLMSObject;
                     GXDLMSDevice dev = tmp.Parent.Tag as GXDLMSDevice;
+                    if (serverClient.Ip != "" && dev.Media is GXNet)
+                    {
+                        GXNet netMedia = dev.Media as GXNet;
+                        netMedia.HostName = serverClient.Ip;
+                        netMedia.Port = serverClient.Port;
+                        netMedia.LocalPort = events.Port;
+                        dev.MediaSettings = netMedia.Settings;
+                        serverClient = ("", 0);
+                    }
                     dev.InitializeConnection();
                     if (dev.PreEstablished)
                     {
@@ -5041,6 +5069,14 @@ namespace GXDLMSDirector
                         OnAddNotification(ex.Message);
                     }
                 }
+                if (Properties.Settings.Default.AutoConnectClient)
+                {
+                    OnAddNotification("Push received, connetting to: " + e.SenderInfo);
+                    serverClient.Ip = e.SenderInfo.Split(':').First();
+                    serverClient.Port = UInt16.Parse(e.SenderInfo.Split(':').Last());
+                    NotificationsBtn.PerformClick();
+                    ConnectBtn.PerformClick();
+                }
             }
         }
 
@@ -5590,6 +5626,7 @@ namespace GXDLMSDirector
                     Properties.Settings.Default.NotifySystemTitle = GXCommon.ToHex(eventsTranslator.SystemTitle, false);
                     Properties.Settings.Default.NotifyBlockCipherKey = GXCommon.ToHex(eventsTranslator.BlockCipherKey, false);
                     Properties.Settings.Default.NotifyAuthenticationKey = GXCommon.ToHex(eventsTranslator.AuthenticationKey, false);
+                    Properties.Settings.Default.AutoConnectClient = (dlg.Controls.Find("AutoConnectClientCb", true)[0] as CheckBox).Checked;
                 }
             }
             catch (Exception Ex)

@@ -110,6 +110,7 @@ namespace GXDLMSDirector
                     (it as IGXSettingsPage).Initialize();
                     Move2(it.Controls, page.Controls, true);
                 }
+                AutoConnectClientCb.Checked = Properties.Settings.Default.AutoConnectClient;
                 //Show external medias.
                 foreach (string it in Properties.Settings.Default.ExternalMedias.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
