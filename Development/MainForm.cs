@@ -1776,6 +1776,7 @@ namespace GXDLMSDirector
                     {
                         if (!it.Media.IsOpen)
                         {
+                            string backupMediaSettings = it.MediaSettings;
                             this.OnProgress(null, "Connecting", ++pos, cnt);
                             if (serverClient.Ip != "" && it.Media is GXNet)
                             {
@@ -1784,9 +1785,13 @@ namespace GXDLMSDirector
                                 netMedia.Port = serverClient.Port;
                                 netMedia.LocalPort = events.Port;
                                 it.MediaSettings = netMedia.Settings;
-                                serverClient = ("", 0);
                             }
                             it.InitializeConnection();
+                            if (serverClient.Ip != "" && it.Media is GXNet)
+                            {
+                                it.MediaSettings = backupMediaSettings;
+                                serverClient = ("", 0);
+                            }
                         }
                     }
                 }
@@ -1795,6 +1800,7 @@ namespace GXDLMSDirector
                     if (!((GXDLMSDevice)obj).Media.IsOpen)
                     {
                         GXDLMSDevice dev = (GXDLMSDevice)obj;
+                        string backupMediaSettings = dev.MediaSettings;
                         this.OnProgress(null, "Connecting", 0, 1);
                         if (serverClient.Ip != "" && dev.Media is GXNet)
                         {
@@ -1803,9 +1809,13 @@ namespace GXDLMSDirector
                             netMedia.Port = serverClient.Port;
                             netMedia.LocalPort = events.Port;
                             dev.MediaSettings = netMedia.Settings;
-                            serverClient = ("", 0);
                         }
                         dev.InitializeConnection();
+                        if (serverClient.Ip != "" && dev.Media is GXNet)
+                        {
+                            dev.MediaSettings = backupMediaSettings;
+                            serverClient = ("", 0);
+                        }
                         if (InvokeRequired)
                         {
                             BeginInvoke(new UpdateConformance(this.OnUpdateConformance), (GXDLMSDevice)obj);
@@ -1848,6 +1858,7 @@ namespace GXDLMSDirector
                     this.OnProgress(null, "Connecting", 0, 1);
                     GXDLMSObject tmp = obj as GXDLMSObject;
                     GXDLMSDevice dev = tmp.Parent.Tag as GXDLMSDevice;
+                    string backupMediaSettings = dev.MediaSettings;
                     if (serverClient.Ip != "" && dev.Media is GXNet)
                     {
                         GXNet netMedia = dev.Media as GXNet;
@@ -1855,9 +1866,13 @@ namespace GXDLMSDirector
                         netMedia.Port = serverClient.Port;
                         netMedia.LocalPort = events.Port;
                         dev.MediaSettings = netMedia.Settings;
-                        serverClient = ("", 0);
                     }
                     dev.InitializeConnection();
+                    if (serverClient.Ip != "" && dev.Media is GXNet)
+                    {
+                        dev.MediaSettings = backupMediaSettings;
+                        serverClient = ("", 0);
+                    }
                     if (dev.PreEstablished)
                     {
                         traceTranslator.ServerSystemTitle = GXCommon.HexToBytes(dev.ServerSystemTitle);
